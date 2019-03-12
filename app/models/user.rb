@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :items
+  
   def self.from_google(google_info)
     email = google_info.emails.first.value
     find_or_create_by(email: email) do |user|

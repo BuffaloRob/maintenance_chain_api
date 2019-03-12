@@ -25,7 +25,7 @@ class TokensController < ApplicationController
     Signet::OAuth2::Client.new(
       authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
       token_credential_uri: 'https://www.googleapis.com/oauth2/v3/token',
-      client_id: Rails.application.credentials.google.id, client_secret: Rails.application.credentials.google.secret,
+      client_id: Rails.application.credentials.google.key, client_secret: Rails.application.credentials.google.secret,
       scope: 'email profile', redirect_uri: 'http://localhost:3001/oauth2callback'
     ).tap do |client|
       client.code = params['code']

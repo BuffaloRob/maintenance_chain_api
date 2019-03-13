@@ -7,6 +7,7 @@ class Api::V1::UsersController < ApplicationController
       render json: { jwt: jwt, current: user }
     else
       render json: { error: 'Sign Up has Failed' }, status: 400
+    end
   end
 
   def login
@@ -20,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    render json: get_current_userr
+    render json: get_current_user
   end
 
   private

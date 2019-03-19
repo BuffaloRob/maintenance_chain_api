@@ -2,7 +2,7 @@ class Api::V1::ItemsController < ApplicationController
   
   def index
     items = get_current_user.items.all
-
+    binding.pry
     render json: items
   end
 
@@ -14,7 +14,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def destroy
-    item = Todo.find(params[:id])
+    item = Item.find(params[:id])
     item.destroy
     
     render json: item
@@ -23,7 +23,7 @@ class Api::V1::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit( :name )
+    params.require(:item).permit( :name, :user_id )
   end
 
 end

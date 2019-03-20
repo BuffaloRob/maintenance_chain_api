@@ -5,13 +5,9 @@ class ApplicationController < ActionController::API
     render json: { message: 'successful', status: 200 }
   end
 
-  def get_current_user
-    jwt_token = request.headers['HTTP_AUTHORIZATION']
-    if jwt_token
-      user_info = Auth.decode(jwt_token)
-      user ||= User.find(user_info['user_id'])
-    end
-    user
+  def authenticate_user
+    jwt = cookies.signed[:jwt]
+    decode_jwt(jwt)
   end
 
 end

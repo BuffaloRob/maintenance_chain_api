@@ -10,4 +10,13 @@ class ApplicationController < ActionController::API
     decode_jwt(jwt)
   end
 
+  def get_current_user
+    jwt = cookies.signed[:jwt]
+    if jwt
+      user_info = decode_jwt(jwt)
+      user ||= User.find(user_info['user_id'])
+    end
+    user
+  end
+
 end

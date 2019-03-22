@@ -23,7 +23,6 @@ class Api::V1::UsersController < ApplicationController
   def create
     user = User.create(user_params)
     if user
-      # created_jwt = issue_token({ id: user.id })
       created_jwt = Auth.encrypt({ user_id: user.id })
       cookies.signed[:jwt] = { value: created_jwt, httponly: true, expires: 1.hour.from_now }
       # binding.pry

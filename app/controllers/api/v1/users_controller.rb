@@ -3,6 +3,7 @@ class Api::V1::UsersController < ApplicationController
   def create
     user = User.create(user_params)
     if user
+      session[:user_id] = user.id
       render json: { currentUser: user }
     else
       render json: { error: 'Sign Up has Failed' }, status: 400
@@ -12,6 +13,7 @@ class Api::V1::UsersController < ApplicationController
   def login
     user = User.find_by(email: params[:user][:email])
     if user && user.authenticate(params[:user][:password])
+      session[:user_id] = user.id
       render json: { currentUser: user }
     else
       render json: { error: 'Login has Failed' }, status: 400

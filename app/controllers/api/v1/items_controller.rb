@@ -2,13 +2,13 @@ class Api::V1::ItemsController < ApplicationController
   before_action :set_item, only: [:update, :destroy]
   
   def index
-    @items = get_current_user.items.all
-    binding.pry
+    @items = current_user.items.all
     render json: @items
   end
 
   def create
-    @item = get_current_user.items.build(item_params)
+    binding.pry
+    @item = current_user.items.build(item_params)
 
     if @item.save
       render json: @item

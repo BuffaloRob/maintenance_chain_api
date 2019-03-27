@@ -12,12 +12,18 @@ class Api::V1::UsersController < ApplicationController
 
   def login
     user = User.find_by(email: params[:user][:email])
+    binding.pry
     if user && user.authenticate(params[:user][:password])
       jwt = Auth.encrypt({ user_id: user.id })
       render json: { jwt: jwt }
     else
       render json: { error: 'Login has Failed' }, status: 400
     end
+  end
+
+  def logout
+    # binding.pry
+    # render json: { jwt: jwt }
   end
 
   def show

@@ -4,7 +4,7 @@ class Api::V1::UsersController < ApplicationController
     user = User.create(user_params)
     if user
       jwt = Auth.encrypt({ user_id: user.id })
-      render json: { jwt: jwt, currentUser: user }
+      render json: { jwt: jwt }
     else
       render json: { error: 'Sign Up has Failed' }, status: 400
     end
@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
     user = User.find_by(email: params[:user][:email])
     if user && user.authenticate(params[:user][:password])
       jwt = Auth.encrypt({ user_id: user.id })
-      render json: { jwt: jwt, currentUser: user }
+      render json: { jwt: jwt }
     else
       render json: { error: 'Login has Failed' }, status: 400
     end

@@ -1,4 +1,4 @@
 class Category < ApplicationRecord
-  belongs_to :logs
-  has_many :items, through: :logs
+  belongs_to :items
+  has_many :logs
 end

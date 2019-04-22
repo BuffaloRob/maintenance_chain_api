@@ -1,4 +1,4 @@
 class Log < ApplicationRecord
   belongs_to :items
-  has_many :categories
+  belongs_to :categories
 end

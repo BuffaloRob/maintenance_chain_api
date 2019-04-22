@@ -3,5 +3,5 @@ class ItemSerializer < ActiveModel::Serializer
   # has_one :user
   belongs_to :user
   has_many :logs
-  has_many :categories, through: :logs
+  has_many :categories
 end

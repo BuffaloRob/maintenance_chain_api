@@ -3,7 +3,7 @@ class Api::V1::ItemsController < ApplicationController
   
   def index
     @items = get_current_user.items.all
-    binding.pry
+    # binding.pry
     render json: @items
   end
 

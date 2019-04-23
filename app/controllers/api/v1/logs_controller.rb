@@ -46,6 +46,6 @@ class Api::V1::LogsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def log_params
-      params.require(:log).permit(:notes, :tools, :cost, :date_performed, :date_due, :items_id)
+      params.require(:log).permit(:notes, :tools, :cost, :date_performed, :date_due, :item_id, category_attributes: [:name, :id])
     end
 end

@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(version: 2019_04_19_153426) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.bigint "items_id"
+    t.bigint "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["items_id"], name: "index_categories_on_items_id"
+    t.index ["item_id"], name: "index_categories_on_item_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -37,12 +37,12 @@ ActiveRecord::Schema.define(version: 2019_04_19_153426) do
     t.integer "cost"
     t.datetime "date_performed"
     t.datetime "date_due"
-    t.bigint "items_id"
+    t.bigint "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "categories_id"
-    t.index ["categories_id"], name: "index_logs_on_categories_id"
-    t.index ["items_id"], name: "index_logs_on_items_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_logs_on_category_id"
+    t.index ["item_id"], name: "index_logs_on_item_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 2019_04_19_153426) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "categories", "items", column: "items_id"
+  add_foreign_key "categories", "items"
   add_foreign_key "items", "users"
-  add_foreign_key "logs", "categories", column: "categories_id"
-  add_foreign_key "logs", "items", column: "items_id"
+  add_foreign_key "logs", "categories"
+  add_foreign_key "logs", "items"
 end

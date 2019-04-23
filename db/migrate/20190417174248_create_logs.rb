@@ -6,7 +6,7 @@ class CreateLogs < ActiveRecord::Migration[5.2]
       t.integer :cost
       t.datetime :date_performed
       t.datetime :date_due
-      t.references :items, foreign_key: true
+      t.references :item, foreign_key: true
 
       t.timestamps
     end

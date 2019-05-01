@@ -1,6 +1,6 @@
 class Api::V1::ItemsController < ApplicationController
-  before_action :set_item, only: [:update, :destroy]
-  
+  before_action :set_item, only: [:update, :destroy, :show]
+
   def index
     @items = get_current_user.items.all
     # binding.pry
@@ -11,6 +11,7 @@ class Api::V1::ItemsController < ApplicationController
     @item = get_current_user.items.build(item_params)
 
     if @item.save
+      # binding.pry
       render json: @item
     else
       render json: @item.errors
@@ -23,6 +24,11 @@ class Api::V1::ItemsController < ApplicationController
     else
       render json: @item.errors
     end
+  end
+
+  def show
+    # binding.pry
+    render json: @item
   end
 
   def destroy

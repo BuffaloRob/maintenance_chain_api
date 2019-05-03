@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :items do
-        resources :logs, only: [:index, :show, :new, :edit, :create]
-        resources :categories, only: [:index, :show, :new, :edit, :create]
+        resources :logs, only: [:index, :show, :new, :edit, :create, :update]
+        resources :categories, only: [:index, :show, :new, :edit, :create, :update]
       end
 
       get 'user', to: 'users#show', as: 'user_show'

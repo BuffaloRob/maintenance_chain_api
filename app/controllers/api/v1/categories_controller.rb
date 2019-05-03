@@ -3,7 +3,9 @@ class Api::V1::CategoriesController < ApplicationController
 
   # GET /categories
   def index
-    @categories = Category.all
+    @item = Item.find_by(id: params[:item_id])
+
+    @categories = @item.categories
 
     render json: @categories
   end
@@ -15,7 +17,10 @@ class Api::V1::CategoriesController < ApplicationController
 
   # POST /categories
   def create
-    @category = Category.new(category_params)
+    # raise params.inspect
+    # @category = Category.new(category_params)
+    @item = Item.find(params[:item_id])
+    @category = @item.categories.find_or_create_by(category_params)
 
     if @category.save
       render json: @category#, status: :created, location: @category

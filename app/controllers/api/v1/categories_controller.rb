@@ -1,5 +1,5 @@
 class Api::V1::CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :update, :destroy]
+  # before_action :set_category, only: [:show, :update, :destroy]
 
   # GET /categories
   def index
@@ -31,23 +31,29 @@ class Api::V1::CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1
   def update
-    if @category.update(category_params)
+    if params[:item_id]
+      item = Item.find_by(id: params[:item_id])
+      @category = item.categories.find_by(id: params[:id])
+      @category.update(category_params)
       render json: @category
-    else
-      render json: @category.errors#, status: :unprocessable_entity
     end
+    # if @category.update(category_params)
+    #   render json: @category
+    # else
+    #   render json: @category.errors#, status: :unprocessable_entity
+    # end
   end
 
   # DELETE /categories/1
   def destroy
-    @category.destroy
+    Category.find(params[:id]).destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
-    end
+    # def set_category
+    #   @category = Category.find(params[:id])
+    # end
 
     # Only allow a trusted parameter "white list" through.
     def category_params

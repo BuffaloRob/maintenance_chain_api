@@ -1,8 +1,10 @@
 class Api::V1::LogsController < ApplicationController
   # before_action :set_log, only: [:show, :update, :destroy]
+  # wrap_parameters format: []
 
   # GET /logs
   def index
+    # binding.pry
     @category = Category.find_by(id: params[:category_id])
     @logs = @category.logs
     render json: @logs
@@ -15,8 +17,10 @@ class Api::V1::LogsController < ApplicationController
 
   # POST /logs
   def create
+    binding.pry
     @item = Item.find(params[:item_id])
     @log = @item.logs.create(log_params)
+    binding.pry
     if @log.save
       render json: @log#, status: :created, location: @log
     else

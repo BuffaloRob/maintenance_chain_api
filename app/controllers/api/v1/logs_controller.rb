@@ -1,6 +1,5 @@
 class Api::V1::LogsController < ApplicationController
   # before_action :set_log, only: [:show, :update, :destroy]
-  # wrap_parameters format: []
 
   # GET /logs
   def index
@@ -17,10 +16,9 @@ class Api::V1::LogsController < ApplicationController
 
   # POST /logs
   def create
-    binding.pry
     @item = Item.find(params[:item_id])
     @log = @item.logs.create(log_params)
-    binding.pry
+    # binding.pry
     if @log.save
       render json: @log#, status: :created, location: @log
     else
@@ -53,6 +51,6 @@ class Api::V1::LogsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def log_params
-      params.require(:log).permit(:notes, :tools, :cost, :date_performed, :date_due, :item_id, category_attributes: [:name, :id])
+      params.require(:log).permit(:notes, :tools, :cost, :date_performed, :date_due, :item_id, :category_id)
     end
 end

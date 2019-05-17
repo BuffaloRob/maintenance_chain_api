@@ -3,15 +3,13 @@ class Api::V1::ItemsController < ApplicationController
 
   def index
     @items = get_current_user.items.all
-    # binding.pry
     render json: @items
   end
 
   def create
     @item = get_current_user.items.build(item_params)
-
+    
     if @item.save
-      # binding.pry
       render json: @item
     else
       render json: @item.errors
@@ -27,13 +25,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    # binding.pry
     render json: @item
   end
 
   def destroy
     @item.destroy
-    # render json: @item
   end
 
   private

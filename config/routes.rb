@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post 'signup', to: 'users#create', as: 'user_signup'
       post 'login', to: 'users#login', as: 'user_login'
       get 'logout', to: 'users#logout', as: 'user_logout'
+      get 'past_due', to: 'logs#past_due', as: 'past_due'
 
     end
   end

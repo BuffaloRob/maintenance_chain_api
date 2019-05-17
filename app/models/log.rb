@@ -6,4 +6,9 @@ class Log < ApplicationRecord
     category = Category.find_by(id: attributes[:id])
     self.category = category
   end
+
+  def self.past_due
+    where("date_due <=?", Time.current)
+  end
+  
 end

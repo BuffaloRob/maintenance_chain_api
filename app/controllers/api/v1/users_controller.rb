@@ -15,7 +15,7 @@ class Api::V1::UsersController < ApplicationController
     # binding.pry
     if user && user.authenticate(params[:user][:password])
       jwt = Auth.encrypt({ user_id: user.id })
-      render json: { jwt: jwt }
+      render json: { jwt: jwt, email: params[:user][:email] }
     else
       render json: { error: 'Login has Failed' }, status: 400
     end

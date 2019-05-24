@@ -36,14 +36,6 @@ class Api::V1::LogsController < ApplicationController
     else
       render json: @log.errors
     end
-    # if params[:category_id]
-    #   item = Item.find_by(id: params[:item_id])
-    #   @log = item.logs.find_by(id: params[:id])
-    #   @log.update(log_params)
-    #   render json: @log
-    # else
-    #   render json: @log.errors#, status: :unprocessable_entity
-    # end
   end
 
   # DELETE /logs/1

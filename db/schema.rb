@@ -17,10 +17,8 @@ ActiveRecord::Schema.define(version: 2019_04_19_153426) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.bigint "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_categories_on_item_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -52,7 +50,6 @@ ActiveRecord::Schema.define(version: 2019_04_19_153426) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "categories", "items"
   add_foreign_key "items", "users"
   add_foreign_key "logs", "categories"
   add_foreign_key "logs", "items"

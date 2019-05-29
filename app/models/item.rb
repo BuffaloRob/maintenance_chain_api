@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_many :categories
-  has_many :logs, through: :categories
+  has_many :categories, through: :logs
+  has_many :logs
 end

@@ -4,8 +4,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :items do
-        resources :logs
-        resources :categories
+        resources :categories do
+          resources :logs
+        end
       end
 
       get 'user', to: 'users#show', as: 'user_show'

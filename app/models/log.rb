@@ -1,6 +1,5 @@
 class Log < ApplicationRecord
   belongs_to :category
-  belongs_to :item
 
   def category_attributes=(attributes)
     category = Category.find_by(id: attributes[:id])

@@ -8,7 +8,7 @@ class Api::V1::ItemsController < ApplicationController
 
   def create
     @item = get_current_user.items.build(item_params)
-    
+    binding.pry
     if @item.save
       render json: @item
     else
@@ -25,6 +25,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
+    # @categories = Category.joins(:logs).where(logs: {item_id: params[:id]})
     render json: @item
   end
 

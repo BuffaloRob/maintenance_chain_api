@@ -3,9 +3,7 @@ class Api::V1::CategoriesController < ApplicationController
   # GET /categories
   def index
     @item = Item.find_by(id: params[:item_id])
-
     @categories = @item.categories
-
     render json: @categories
   end
 
@@ -18,7 +16,6 @@ class Api::V1::CategoriesController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @category = @item.categories.find_or_create_by(category_params)
-
     if @category.save
       render json: @category
     else

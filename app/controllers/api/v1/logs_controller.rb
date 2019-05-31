@@ -17,13 +17,12 @@ class Api::V1::LogsController < ApplicationController
 
   # POST /logs
   def create
-    @item = Item.find(params[:item_id])
-    @log = @item.logs.create(log_params)
-    # binding.pry
+    @category = Category.find(params[:category_id])
+    @log = @category.logs.create(log_params)
     if @log.save
-      render json: @log#, status: :created, location: @log
+      render json: @log
     else
-      render json: @log.errors#, status: :unprocessable_entity
+      render json: @log.errors
     end
   end
 

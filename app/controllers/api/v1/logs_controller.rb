@@ -28,8 +28,8 @@ class Api::V1::LogsController < ApplicationController
 
   # PATCH/PUT /logs/1
   def update
-    item = Item.find_by(id: params[:item_id])
-    @log = item.logs.find_by(id: params[:id])
+    category = Category.find_by(id: params[:category_id])
+    @log = category.logs.find_by(id: params[:id])
     if @log.update(log_params)
       render json: @log
     else

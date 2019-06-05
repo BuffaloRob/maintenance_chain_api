@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 2019_04_19_153426) do
     t.string "notes"
     t.string "tools"
     t.integer "cost"
-    t.datetime "date_performed"
-    t.datetime "date_due"
+    t.date "date_performed"
+    t.date "date_due"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "category_id"

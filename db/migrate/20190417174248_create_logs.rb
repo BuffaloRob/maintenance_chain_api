@@ -4,8 +4,8 @@ class CreateLogs < ActiveRecord::Migration[5.2]
       t.string :notes
       t.string :tools
       t.integer :cost
-      t.datetime :date_performed
-      t.datetime :date_due
+      t.date :date_performed
+      t.date :date_due
 
       t.timestamps
     end

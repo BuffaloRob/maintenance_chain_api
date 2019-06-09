@@ -48,9 +48,9 @@ class Api::V1::LogsController < ApplicationController
     @items.each do |item|
       item.logs.past_due.each do |log|
         @current_user_logs << log
-        render json: @current_user_logs
       end
     end
+    render json: @current_user_logs
   end
 
   private

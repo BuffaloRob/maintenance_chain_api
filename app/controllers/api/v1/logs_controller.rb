@@ -14,28 +14,31 @@ class Api::V1::LogsController < ApplicationController
 
   # POST /logs
   def create
-  #   @category = Category.find(params[:category_id])
-  #   @last_log = @category.logs.order(date_due: :desc).first
-  #   @log = @category.logs.create(log_params)
-  #   if @log.save
-  #     @last_log.current = false
-  #     #@last_log.toggle(:current).save
-  #     #@last_log.update(active: false)
-  #     @lost_log.save
-  #     render json: @log
-  #   else
-  #     render json: @log.errors
-  #   end
-  # end
-  def create
     @category = Category.find(params[:category_id])
+    # need conditional for when its the first log being made
+    @last_log = @category.logs.order(date_due: :desc).first
     @log = @category.logs.create(log_params)
     if @log.save
+      # @last_log.current = false
+      #@last_log.toggle(:current).save
+      @last_log.update(active: false)
+      binding.pry
+      @lost_log.save
       render json: @log
     else
       render json: @log.errors
     end
   end
+
+  # def create
+  #   @category = Category.find(params[:category_id])
+  #   @log = @category.logs.create(log_params)
+  #   if @log.save
+  #     render json: @log
+  #   else
+  #     render json: @log.errors
+  #   end
+  # end
 
   # PATCH/PUT /logs/1
   def update
@@ -57,12 +60,16 @@ class Api::V1::LogsController < ApplicationController
     @all_past_due = []
     @items = get_current_user.items.all
     @items.each do |item|
-      item.logs.past_due.current_log.each do |log|
+      # binding.pry
+      filtered = item.logs.past_due
+      filtered = filtered.as_json
+      filtered.each do |log|
         @all_past_due << log
       end
     end
+    binding.pry
     render json: @all_past_due
-
+  end
     ####
     # @all_logs = []
     # @last_performed = []
@@ -96,8 +103,8 @@ class Api::V1::LogsController < ApplicationController
     #   # binding.pry
     # end
     # render json: @final_array
+    #   end
     #####
-  end
 
   private
     # Only allow a trusted parameter "white list" through.

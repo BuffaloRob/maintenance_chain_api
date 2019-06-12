@@ -43,10 +43,10 @@ class Api::V1::LogsController < ApplicationController
     @over_due = []
     items = get_current_user.items.all
     categories = items.collect{|item| item.categories}.flatten
-    # get the latest log performed for that category
-    last_log = categories.collect{|cat| cat.logs.first}.flatten.compact
-    # then check to see if that log is past due
-    last_log.each do |log|
+    # get the latest log performed for each category
+    last_logs = categories.collect{|cat| cat.logs.first}.flatten.compact
+    # then check to see if that log is past due. Can't use collect here because it doesn't return the category info on the log needed for the client
+    last_logs.each do |log|
       if (log.date_due <= Time.current)
         @over_due << log
       end

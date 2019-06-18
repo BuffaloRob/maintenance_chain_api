@@ -2,12 +2,12 @@ class Api::V1::ItemsController < ApplicationController
   before_action :set_item, only: [:update, :destroy, :show]
 
   def index
-    @items = get_current_user.items.all
+    @items = current_user.items.all
     render json: @items
   end
 
   def create
-    @item = get_current_user.items.build(item_params)
+    @item = current_user.items.build(item_params)
     if @item.save
       render json: @item
     else
@@ -24,7 +24,6 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    # @categories = Category.joins(:logs).where(logs: {item_id: params[:id]})
     render json: @item
   end
 

@@ -41,7 +41,7 @@ class Api::V1::LogsController < ApplicationController
 
   def past_due
     @over_due = []
-    items = get_current_user.items.all
+    items = current_user.items.all
     categories = items.collect{|item| item.categories}.flatten
     # get the latest log performed for each category
     last_logs = categories.collect{|cat| cat.logs.first}.flatten.compact

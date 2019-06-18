@@ -1,34 +1,26 @@
 class Api::V1::UsersController < ApplicationController
+  skip_before_action :authorized, only: [:create]
+
+  def profile
+    render json: { user: UserSerializer.new(current_user) }, status: :accepted
+  end
 
   def create
-    user = User.create(user_params)
-    if user
-      jwt = Auth.encrypt({ user_id: user.id })
-      render json: { jwt: jwt, user: {id: user.id, email: user.email} }
+    @user = User.create(user_params)
+    if @user.valid?
+      @token = encode_token(user_id: @user.id)
+      render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
     else
-      render json: { error: 'Sign Up has Failed' }, status: 400
+      render json: { error: 'Sign Up has Failed' }, status: :not_acceptable
     end
   end
 
-  def login
-    user = User.find_by(email: params[:user][:email])
-    if user && user.authenticate(params[:user][:password])
-      jwt = Auth.encrypt({ user_id: user.id })
-      render json: { jwt: jwt, user: {id: user.id, email: user.email} }      
-    else
-      render json: { error: 'Login has Failed' }, status: 400
-    end
-  end
 
   def logout
     # binding.pry
     # render json: { jwt: jwt }
   end
-
-  def show
-    render json: get_current_user
-  end
-
+  
   private
 
   def user_params

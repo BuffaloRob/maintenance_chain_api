@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:3005', 'https://maintenancechain.surge.sh'
+    origins 'http://localhost:3005', 'https://maintenancechain.surge.sh', 'https://maintenance-chain.surge.sh'
 
     resource '*',
       headers: :any,

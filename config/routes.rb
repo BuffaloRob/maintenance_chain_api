@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post 'login', to: 'auth#create', as: 'user_login'
       get 'logout', to: 'users#logout', as: 'user_logout'
       get 'past_due', to: 'logs#past_due', as: 'past_due'
+      get 'upcoming', to: 'logs#upcoming', as: 'upcoming'
     end
   end
 

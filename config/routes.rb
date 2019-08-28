@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'private/hello'
+  get 'public/hello'
   namespace :api do
     namespace :v1 do
       resources :users

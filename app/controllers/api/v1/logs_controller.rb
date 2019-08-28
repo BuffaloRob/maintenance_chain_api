@@ -58,7 +58,7 @@ class Api::V1::LogsController < ApplicationController
     @future = []
     items = current_user.items.all
     categories = items.collect{|item| item.categories}.flatten
-    # get the latest log upcoming for each category
+    # get the latest log performed for each category
     last_logs = categories.collect{|cat| cat.logs.first}.flatten.compact
     # then check to see if that log is upcoming. Can't use collect here because it doesn't return the category info on the log needed for the client
     last_logs.each do |log|

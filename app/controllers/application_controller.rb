@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  before_action :authorized
+  # before_action :authorized
 
   def index
     render json: { message: 'successful', status: 200 }
@@ -37,8 +37,8 @@ class ApplicationController < ActionController::API
     !!current_user
   end
 
-  def authorized
-    render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
-  end
+  # def authorized
+  #   render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
+  # end
 
 end

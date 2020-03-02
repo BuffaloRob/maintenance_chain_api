@@ -1,4 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
+  include Secured
   before_action :set_item, only: [:update, :destroy, :show]
 
   def index

@@ -11,6 +11,7 @@ module Secured
   private
 
   def authenticate_request!
+    # binding.pry
     auth_token
   rescue JWT::VerificationError, JWT::DecodeError
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized
@@ -23,6 +24,7 @@ module Secured
   end
 
   def auth_token
+    # binding.pry
     JsonWebToken.verify(http_token)
   end
 end

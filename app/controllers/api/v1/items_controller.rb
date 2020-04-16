@@ -1,7 +1,9 @@
 class Api::V1::ItemsController < ApplicationController
   before_action :set_item, only: [:update, :destroy, :show]
+  include Secured
 
   def index
+    # binding.pry
     @items = current_user.items.all
     render json: @items
   end

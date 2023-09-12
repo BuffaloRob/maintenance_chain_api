@@ -3,7 +3,6 @@ class Api::V1::ItemsController < ApplicationController
   include Secured
 
   def index
-    # binding.pry
     @items = current_user.items.all
     render json: @items
   end
@@ -40,7 +39,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit( :name, :user_id )
+    params.require(:item).permit( :name, :user_id, :auth0_user )
   end
 
 end
